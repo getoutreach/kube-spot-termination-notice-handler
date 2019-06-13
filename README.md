@@ -5,22 +5,13 @@ Once a termination notice is received, it will try to gracefully stop all the po
 
 ### Helm
 
-A helm chart has been created for this tool, and at time of writing was in the `stable` repository.
-
-    $ helm install stable/k8s-spot-termination-handler
-
 ## Available docker images/tags
 
 Tags denotes Kubernetes/`kubectl` versions.
 Using the same version for your Kubernetes cluster and spot-termination-notice-handler is recommended.
 Note that the `-1` (or similar) is the revision of this tool, in case we need versioning.
 
-* `kubeaws/kube-spot-termination-notice-handler:1.8.5-1`
-* `kubeaws/kube-spot-termination-notice-handler:1.9.0-1`
-* `kubeaws/kube-spot-termination-notice-handler:1.10.11-2`
-* `kubeaws/kube-spot-termination-notice-handler:1.11.3-1`
-* `kubeaws/kube-spot-termination-notice-handler:1.12.0-2`
-* `kubeaws/kube-spot-termination-notice-handler:1.13.7-1`
+* `registry.outreach.cloud/spot-termination-notice-handler:1.11.7-1`
 
 ## Why use it
 
@@ -49,7 +40,12 @@ Fri Jul 29 hh:mm:ss UTC 2016: 200
 
 ## Building against a specific version of Kubernetes
 
-Run `KUBE_VERSION=<your desired k8s version> make build` to specify the version number of k8s/kubectl.
+Update `KUBE_VERSION` to your desired k8s/kubectl version in the `Dockerfile`.
+
+```bash
+KUBE_VERSION=<your desired k8s version>
+docker build -t registry.outreach.cloud/spot-termination-notice-handler:${KUBE_VERSION}-1 .
+```
 
 ## Slack Notifications
 Introduced in version 0.9.2 of this application (the @mumoshu version), you are able to setup a Slack incoming web hook in order to send slack notifications to a channel, notifying the users that an instance has been terminated.
